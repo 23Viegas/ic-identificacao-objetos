@@ -9,7 +9,7 @@ webcam = cv2.VideoCapture(0) # pegar o video da webcam
 if webcam.isOpened(): # abrir camera
      validacao, frame = webcam.read() # fazer validacao do frama, se der continua, se n der para
      
-while validacao: 
+while True: 
     validacao, frame = webcam.read()
     
     if not validacao: 
@@ -43,9 +43,9 @@ while validacao:
         confianca = float(caixa.conf[0])
         classe = int(caixa.cls[0])
         nome = modelo.names[classe]
-        texto = nome + " " + str(round(confianca, 2))
+        texto = nome + " " + str(round(confianca, 2)) + " X: " + str(round(centro_x)) + " Y: " + str(round(centro_y))
 
-        if confianca > 0.5:
+        if confianca > 0.7:
            # desenhar caixas
            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2) # fazer o retangulo
            cv2.putText(frame, texto, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2) # colocar a cor, texto, borda do retangulo
