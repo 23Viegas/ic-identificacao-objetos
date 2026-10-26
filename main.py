@@ -1,7 +1,7 @@
 # bibliotecas
 import cv2
 from ultralytics import YOLO
-modelo_objeto = YOLO("runs/detect/train-2/weights/best.pt")
+modelo_objeto = YOLO("modelo/best.pt")
 modelo_normal = YOLO("yolo11n.pt")
 
 webcam = cv2.VideoCapture(0) # pegar o video da webcam
@@ -17,7 +17,7 @@ while validacao:
             break
 
 
-    resultado_objeto = modelo_objeto(frame, conf=0.5, iou=0.5)
+    resultado_objeto = modelo_objeto(frame, conf=0.7, iou=0.5)
     resultado_normal = modelo_normal(frame, conf=0.6, iou=0.5)
 
     for item in resultado_objeto:
